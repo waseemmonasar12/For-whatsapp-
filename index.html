@@ -14,20 +14,17 @@
         body { font-family: 'Cairo', sans-serif; background: var(--bg); margin: 0; color: var(--navy); }
         header { background: var(--navy); color: white; padding: 60px 20px; text-align: center; border-bottom: 5px solid var(--gold); }
         .logo { font-size: 60px; margin-bottom: 15px; display: block; }
-        .container { max-width: 1100px; margin: -40px auto 50px auto; background: white; padding: 35px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         
-        /* تنسيق عداد الزوار */
-        .visitor-counter {
-            background: var(--navy);
-            color: var(--gold);
+        /* تنسيق عداد الزوار الجديد */
+        .visitor-badge {
+            margin-top: 15px;
             display: inline-block;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            margin-top: 10px;
-            border: 1px solid var(--gold);
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
         }
 
+        .container { max-width: 1100px; margin: -40px auto 50px auto; background: white; padding: 35px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .status-msg { text-align: center; padding: 10px; background: #f8fafc; border-radius: 10px; margin-bottom: 30px; border: 1px solid #e2e8f0; font-size: 0.9rem; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
         .card { background: white; border: 1px solid #eee; border-radius: 15px; padding: 25px; text-align: center; transition: 0.3s; border-right: 5px solid var(--gold); }
@@ -41,10 +38,12 @@
 
 <header>
     <span class="logo">⚜️</span>
-    <h1>منصة  أبو محمد العبيدي</h1>
+    <h1>منصة الأستاذ أبو محمد العبيدي</h1>
     <p>الحقيبة التدريبية والمصادر التعليمية</p>
-    <div class="visitor-counter">
-        عدد الزيارات: <span id="count">...</span>
+    
+    <div class="visitor-badge">
+        <p style="margin:0 0 5px 0; font-size:0.8rem;">إحصائيات الزوار</p>
+        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fwaseemmonasar12%2FFor-whatsapp-&count_bg=%23C5A059&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=الزيارات&edge_flat=false" alt="عداد الزوار"/>
     </div>
 </header>
 
@@ -62,7 +61,6 @@
     const REPO = "For-whatsapp-"; 
     const FOLDER = "books"; 
 
-    // وظيفة جلب الكتب
     async function getBooks() {
         const grid = document.getElementById('bookGrid');
         const msg = document.getElementById('msg');
@@ -102,6 +100,12 @@
             msg.innerText = "خطأ في الاتصال بالمستودع. تأكد من إعدادات الخصوصية.";
         }
     }
+
+    window.onload = getBooks;
+</script>
+
+</body>
+</html>
 
     // وظيفة عداد الزوار (تعمل تلقائياً عند فتح الصفحة)
     async function updateCounter() {
