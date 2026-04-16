@@ -106,25 +106,3 @@
 
 </body>
 </html>
-
-    // وظيفة عداد الزوار (تعمل تلقائياً عند فتح الصفحة)
-    async function updateCounter() {
-        try {
-            // سنستخدم اسم مستخدمك واسم المستودع لإنشاء مفتاح فريد للعداد
-            const response = await fetch(`https://api.countapi.xyz/hit/${USER}-${REPO}/visits`);
-            const data = await response.json();
-            document.getElementById('count').innerText = data.value;
-        } catch (error) {
-            // في حال تعطل خدمة العداد الخارجية لا يتوقف الموقع
-            document.getElementById('count').innerText = "١"; 
-        }
-    }
-
-    window.onload = function() {
-        getBooks();
-        updateCounter();
-    };
-</script>
-
-</body>
-</html>
