@@ -15,6 +15,19 @@
         header { background: var(--navy); color: white; padding: 60px 20px; text-align: center; border-bottom: 5px solid var(--gold); }
         .logo { font-size: 60px; margin-bottom: 15px; display: block; }
         .container { max-width: 1100px; margin: -40px auto 50px auto; background: white; padding: 35px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        
+        /* تنسيق عداد الزوار */
+        .visitor-counter {
+            background: var(--navy);
+            color: var(--gold);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            border: 1px solid var(--gold);
+        }
+
         .status-msg { text-align: center; padding: 10px; background: #f8fafc; border-radius: 10px; margin-bottom: 30px; border: 1px solid #e2e8f0; font-size: 0.9rem; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
         .card { background: white; border: 1px solid #eee; border-radius: 15px; padding: 25px; text-align: center; transition: 0.3s; border-right: 5px solid var(--gold); }
@@ -30,6 +43,9 @@
     <span class="logo">⚜️</span>
     <h1>منصة الأستاذ أبو محمد العبيدي</h1>
     <p>الحقيبة التدريبية والمصادر التعليمية</p>
+    <div class="visitor-counter">
+        عدد الزيارات: <span id="count">...</span>
+    </div>
 </header>
 
 <div class="container">
@@ -42,11 +58,11 @@
 </footer>
 
 <script>
-    // البيانات المستخرجة من صورتك
     const USER = "waseemmonasar12"; 
     const REPO = "For-whatsapp-"; 
     const FOLDER = "books"; 
 
+    // وظيفة جلب الكتب
     async function getBooks() {
         const grid = document.getElementById('bookGrid');
         const msg = document.getElementById('msg');
@@ -87,7 +103,23 @@
         }
     }
 
-    window.onload = getBooks;
+    // وظيفة عداد الزوار (تعمل تلقائياً عند فتح الصفحة)
+    async function updateCounter() {
+        try {
+            // سنستخدم اسم مستخدمك واسم المستودع لإنشاء مفتاح فريد للعداد
+            const response = await fetch(`https://api.countapi.xyz/hit/${USER}-${REPO}/visits`);
+            const data = await response.json();
+            document.getElementById('count').innerText = data.value;
+        } catch (error) {
+            // في حال تعطل خدمة العداد الخارجية لا يتوقف الموقع
+            document.getElementById('count').innerText = "١"; 
+        }
+    }
+
+    window.onload = function() {
+        getBooks();
+        updateCounter();
+    };
 </script>
 
 </body>
