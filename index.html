@@ -1,115 +1,820 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<script src="https://cdn.counter.dev/script.js" data-id="3c450f06-3ecb-4e02-8ccd-23c8958b0170" data-utcoffset="2"></script> 
+    <script src="https://cdn.counter.dev/script.js" data-id="3c450f06-3ecb-4e02-8ccd-23c8958b0170" data-utcoffset="2"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أكاديمية أبو محمد العبيدي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>أكاديمية أبو محمد العبيدي | منصة العلم والمعرفة</title>
+    
+    <!-- الخطوط والأيقونات -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
     <style>
-        :root { --gold: #c5a059; --navy: #0f172a; --white: #ffffff; }
-        body { font-family: 'Cairo', sans-serif; background: #f1f5f9; margin: 0; color: var(--navy); }
-        header { background: var(--navy); color: white; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--gold); }
-        .visitor-badge { margin-top: 15px; display: inline-block; background: rgba(255,255,255,0.1); padding: 8px; border-radius: 8px; }
-        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
-        
-        /* تنسيق أقسام الدورات */
-        .course-section { margin-bottom: 50px; }
-        .course-title { 
-            background: var(--navy); color: var(--gold); 
-            padding: 15px 25px; border-radius: 10px; 
-            margin-bottom: 20px; display: inline-block;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        :root { 
+            --gold: #c5a059; 
+            --gold-light: #d4b96a;
+            --gold-dark: #a07d35;
+            --navy: #0f172a;
+            --navy-light: #1e293b;
+            --navy-dark: #0a0f1a;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
+            --shadow-xl: 0 12px 48px rgba(0,0,0,0.2);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .card { 
-            background: white; border-radius: 15px; padding: 25px; text-align: center; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 4px solid var(--gold);
-            transition: 0.3s;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+            color: var(--navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
-        .card:hover { transform: translateY(-5px); }
-        .btn { 
-            display: inline-block; background: var(--gold); color: var(--navy); 
-            text-decoration: none; padding: 10px 20px; border-radius: 8px; 
-            margin-top: 15px; font-weight: bold; width: 100%; box-sizing: border-box;
+
+        /* تأثير الجزيئات في الخلفية */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
-        .status { text-align: center; padding: 20px; font-weight: bold; }
+        .particle {
+            position: absolute;
+            background: var(--gold);
+            opacity: 0.1;
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100vh) rotate(720deg); }
+        }
+
+        /* شريط التقدم */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold-dark));
+            z-index: 9999;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        /* الهيدر المتطور */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
+            color: white;
+            padding: 0;
+            text-align: center;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: rotate 30s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            padding: 40px 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .logo-container {
+            margin-bottom: 30px;
+        }
+        .logo-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--navy);
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.4);
+            animation: pulse 3s infinite;
+            position: relative;
+        }
+        .logo-circle::after {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            animation: ripple 3s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(197, 160, 89, 0.3);
+        }
+        .header-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-300);
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* شريط البحث */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border-radius: 50px;
+            border: 2px solid var(--gold);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1.1rem;
+            font-family: 'Cairo', sans-serif;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        .search-input::placeholder { color: var(--gray-300); }
+        .search-input:focus {
+            outline: none;
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.3);
+        }
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        /* الإحصائيات */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            min-width: 120px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            transition: var(--transition);
+        }
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+        }
+        .stat-label {
+            color: var(--gray-300);
+            font-size: 0.9rem;
+        }
+
+        .visitor-badge {
+            margin-top: 30px;
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 12px 25px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        /* زر التمرير */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--gold);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 2;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* القائمة الجانبية للفلاتر */
+        .filter-bar {
+            background: white;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 1200px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--navy);
+            background: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--navy);
+            color: var(--gold);
+        }
+        .result-count {
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        /* المحتوى الرئيسي */
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* أقسام الدورات المحسنة */
+        .course-section {
+            margin-bottom: 60px;
+            animation: slideIn 0.6s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .course-title {
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            color: var(--gold);
+            padding: 18px 35px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .course-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gold);
+        }
+        .course-count {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        /* شبكة الكتب المحسنة */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border-top: 5px solid var(--gold);
+            transition: var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 0;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-top-color: var(--gold-light);
+        }
+        .card:hover::before { opacity: 0.95; }
+        .card:hover * { color: white !important; z-index: 1; position: relative; }
+        .card:hover .btn {
+            background: var(--gold);
+            color: var(--navy) !important;
+        }
+        .card:hover .btn:hover {
+            background: var(--gold-light);
+            transform: scale(1.05);
+        }
+        .card:hover .book-icon {
+            color: var(--gold) !important;
+            transform: rotateY(360deg);
+        }
+
+        .book-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            transition: var(--transition-slow);
+            margin-bottom: 10px;
+        }
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            transition: var(--transition);
+        }
+
+        /* أزرار متطورة */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--navy);
+            color: var(--gold);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition);
+            width: 100%;
+            justify-content: center;
+            border: 2px solid var(--gold);
+            position: relative;
+            z-index: 1;
+        }
+        .btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 5px 20px rgba(197, 160, 89, 0.4);
+        }
+
+        /* تحميل متطور */
+        .loader {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--gray-200);
+            border-top: 5px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* زر العودة للأعلى */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--navy);
+            color: var(--gold);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--gold);
+            font-size: 1.2rem;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* الوضع الليلي */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--navy);
+            color: var(--gold);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            border: 2px solid var(--gold);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        body.dark-mode {
+            background: linear-gradient(135deg, #0a0f1a, #0f172a);
+            color: #e2e8f0;
+        }
+        body.dark-mode .card { background: #1e293b; }
+        body.dark-mode .filter-bar { background: #1e293b; }
+        body.dark-mode .filter-btn { border-color: #cbd5e1; color: #e2e8f0; }
+
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .header-title { font-size: 2.5rem; }
+            .header-subtitle { font-size: 1.2rem; }
+            .stats-container { gap: 15px; }
+            .stat-item { padding: 15px; min-width: 100px; }
+            .books-grid { grid-template-columns: 1fr; }
+            .filter-bar { padding: 10px; }
+        }
     </style>
 </head>
 <body>
 
+<!-- جزيئات الخلفية -->
+<div class="particles" id="particles"></div>
+
+<!-- شريط التقدم -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- زر الوضع الليلي -->
+<div class="dark-mode-toggle" onclick="toggleDarkMode()" title="الوضع الليلي">
+    <i class="fas fa-moon"></i>
+</div>
+
+<!-- زر العودة للأعلى -->
+<div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<!-- الهيدر -->
 <header>
-    <span style="font-size: 50px;">⚜️</span>
-    <h1>منصة  أبو محمد العبيدي</h1>
-    <p>جميع الدورات التدريبية والحقائب التعليمية</p>
-    <div class="visitor-badge">
-        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fwaseemmonasar12%2FFor-whatsapp-&count_bg=%23C5A059&title_bg=%23555555&title=الزيارات" alt="الزوار"/>
+    <div class="header-content">
+        <div class="logo-container">
+            <div class="logo-circle">⚜️</div>
+        </div>
+        <h1 class="header-title">أكاديمية أبو محمد العبيدي</h1>
+        <p class="header-subtitle">منصة العلم والمعرفة - جميع الدورات التدريبية والحقائب التعليمية</p>
+        
+        <!-- البحث -->
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن دورة أو كتاب...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <!-- الإحصائيات -->
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number" id="coursesCount">0</div>
+                <div class="stat-label">دورة تدريبية</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="booksCount">0</div>
+                <div class="stat-label">كتاب ومادة</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="visitorsCount">...</div>
+                <div class="stat-label">زائر</div>
+            </div>
+        </div>
+
+        <div class="visitor-badge">
+            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fwaseemmonasar12%2FFor-whatsapp-&count_bg=%23C5A059&title_bg=%23555555&title=الزيارات" alt="الزوار"/>
+        </div>
+    </div>
+    <div class="scroll-down" onclick="document.getElementById('mainContainer').scrollIntoView({behavior: 'smooth'})">
+        <i class="fas fa-chevron-down"></i>
     </div>
 </header>
 
-<div class="container" id="mainContainer">
-    <div class="status" id="loadStatus">جاري جلب الدورات والكتب...</div>
+<!-- الفلاتر -->
+<div class="filter-bar" id="filterBar">
+    <span class="result-count">📚 جميع الدورات</span>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button class="filter-btn active" onclick="filterCourses('all')">الكل</button>
+        <button class="filter-btn" onclick="filterCourses('recent')">الأحدث</button>
+        <button class="filter-btn" onclick="filterCourses('popular')">الأكثر زيارة</button>
+    </div>
 </div>
 
+<!-- المحتوى -->
+<div class="container" id="mainContainer">
+    <div class="loader">
+        <div class="spinner"></div>
+        <p style="color: var(--navy); font-weight: 600;">جاري تحميل المكتبة...</p>
+    </div>
+</div>
+
+<!-- السكريبتات -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
     const USER = "waseemmonasar12";
     const REPO = "For-whatsapp-";
-    const MAIN_FOLDER = "courses"; // المجلد الرئيسي الذي يحتوي المجلدات الفرعية
+    const MAIN_FOLDER = "courses";
+    let allCourses = [];
+    let allBooks = [];
 
-    async function loadLibrary() {
-        const container = document.getElementById('mainContainer');
-        const status = document.getElementById('loadStatus');
-
-        try {
-            // 1. جلب المجلدات داخل courses
-            const res = await fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/${MAIN_FOLDER}`);
-            const folders = await res.json();
-
-            if (!Array.isArray(folders)) {
-                status.innerHTML = "⚠️ يرجى إنشاء مجلد باسم <b>courses</b> في GitHub";
-                return;
-            }
-
-            container.innerHTML = ''; // مسح رسالة التحميل
-
-            // 2. الدوران على كل مجلد (دورة)
-            for (const folder of folders) {
-                if (folder.type === 'dir') {
-                    const section = document.createElement('section');
-                    section.className = 'course-section';
-                    section.innerHTML = `<h2 class="course-title">📂 دورة: ${folder.name}</h2><div class="books-grid" id="grid-${folder.sha}"></div>`;
-                    container.appendChild(section);
-
-                    // 3. جلب الملفات داخل كل مجلد
-                    const fileRes = await fetch(folder.url);
-                    const files = await fileRes.json();
-                    const grid = document.getElementById(`grid-${folder.sha}`);
-
-                    const pdfs = files.filter(f => f.name.endsWith('.pdf'));
-                    
-                    if (pdfs.length === 0) {
-                        grid.innerHTML = "<p>لا توجد ملفات في هذه الدورة بعد.</p>";
-                    } else {
-                        pdfs.forEach(pdf => {
-                            const bookName = pdf.name.replace('.pdf', '').replace(/[-_]/g, ' ');
-                            grid.innerHTML += `
-                                <div class="card">
-                                    <span style="font-size:40px;">📕</span>
-                                    <h3>${bookName}</h3>
-                                    <a href="${pdf.download_url}" class="btn" target="_blank">فتح الكتاب</a>
-                                </div>
-                            `;
-                        });
-                    }
-                }
-            }
-        } catch (e) {
-            status.innerHTML = "❌ خطأ: تأكد من تسمية المجلدات بشكل صحيح.";
+    // إنشاء الجزيئات
+    function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 10 + 5;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            container.appendChild(particle);
         }
     }
 
+    // شريط التقدم
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+        
+        // زر العودة للأعلى
+        const backBtn = document.getElementById('backToTop');
+        if (scrollTop > 500) backBtn.classList.add('show');
+        else backBtn.classList.remove('show');
+    });
+
+    // العودة للأعلى
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // الوضع الليلي
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const icon = document.querySelector('.dark-mode-toggle i');
+        if (document.body.classList.contains('dark-mode')) {
+            icon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            icon.classList.replace('fa-sun', 'fa-moon');
+        }
+    }
+
+    // البحث
+    let searchTimeout;
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => searchCourses(e.target.value), 300);
+        });
+    });
+
+    function searchCourses(query) {
+        if (!query) {
+            renderAllCourses();
+            return;
+        }
+        const searchTerm = query.toLowerCase().trim();
+        const filtered = allCourses.filter(course => 
+            course.name.toLowerCase().includes(searchTerm) ||
+            course.books.some(book => book.name.toLowerCase().includes(searchTerm))
+        );
+        renderFilteredCourses(filtered);
+    }
+
+    // تصفية الدورات
+    function filterCourses(type) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        if (type === 'all') renderAllCourses();
+        else if (type === 'recent') {
+            const sorted = [...allCourses].reverse();
+            renderFilteredCourses(sorted);
+        } else if (type === 'popular') {
+            const sorted = [...allCourses].sort((a, b) => b.books.length - a.books.length);
+            renderFilteredCourses(sorted);
+        }
+    }
+
+    // تحميل المكتبة
+    async function loadLibrary() {
+        const container = document.getElementById('mainContainer');
+        
+        try {
+            const res = await fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/${MAIN_FOLDER}`);
+            if (!res.ok) throw new Error('مجلد غير موجود');
+            const folders = await res.json();
+
+            if (!Array.isArray(folders)) {
+                container.innerHTML = '<div class="loader"><p style="color: red;">⚠️ يرجى إنشاء مجلد باسم <b>courses</b> في GitHub</p></div>';
+                return;
+            }
+
+            const coursePromises = folders
+                .filter(folder => folder.type === 'dir')
+                .map(async folder => {
+                    const fileRes = await fetch(folder.url);
+                    const files = await fileRes.json();
+                    const pdfs = files.filter(f => f.name.endsWith('.pdf'));
+                    return {
+                        name: folder.name,
+                        books: pdfs.map(pdf => ({
+                            name: pdf.name.replace('.pdf', '').replace(/[-_]/g, ' '),
+                            url: pdf.download_url,
+                            size: pdf.size
+                        })),
+                        sha: folder.sha
+                    };
+                });
+
+            allCourses = await Promise.all(coursePromises);
+            allBooks = allCourses.flatMap(c => c.books);
+            
+            updateStats();
+            renderAllCourses();
+
+        } catch (e) {
+            container.innerHTML = `<div class="loader"><p style="color: red;">❌ خطأ: ${e.message}</p></div>`;
+        }
+    }
+
+    function updateStats() {
+        document.getElementById('coursesCount').textContent = allCourses.length;
+        document.getElementById('booksCount').textContent = allBooks.length;
+    }
+
+    function renderAllCourses() {
+        renderFilteredCourses(allCourses);
+    }
+
+    function renderFilteredCourses(courses) {
+        const container = document.getElementById('mainContainer');
+        container.innerHTML = '';
+
+        if (courses.length === 0) {
+            container.innerHTML = '<div class="loader"><p>🔍 لا توجد نتائج للبحث</p></div>';
+            return;
+        }
+
+        courses.forEach((course, index) => {
+            const section = document.createElement('section');
+            section.className = 'course-section';
+            section.style.animationDelay = (index * 0.1) + 's';
+            section.innerHTML = `
+                <h2 class="course-title">
+                    <i class="fas fa-folder-open"></i>
+                    ${course.name}
+                    <span class="course-count">${course.books.length} كتاب</span>
+                </h2>
+                <div class="books-grid">
+                    ${course.books.map(book => `
+                        <div class="card" onclick="window.open('${book.url}', '_blank')">
+                            <div class="book-icon">📕</div>
+                            <h3>${book.name}</h3>
+                            <p style="font-size: 0.85rem; color: #64748b;">${(book.size / 1024 / 1024).toFixed(2)} MB</p>
+                            <a href="${book.url}" class="btn" target="_blank" onclick="event.stopPropagation();">
+                                <i class="fas fa-download"></i>
+                                تحميل الكتاب
+                            </a>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            container.appendChild(section);
+        });
+
+        // إظهار شريط الفلاتر
+        document.getElementById('filterBar').style.display = 'flex';
+        document.querySelector('.result-count').textContent = `📚 ${courses.length} دورة تدريبية`;
+    }
+
+    // بدء التحميل
+    createParticles();
     window.onload = loadLibrary;
+
+    // تأثيرات إضافية عند التمرير
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            document.querySelectorAll('.course-section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.6s ease';
+                observer.observe(section);
+            });
+        }, 1000);
+    });
 </script>
 
 </body>
